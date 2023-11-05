@@ -100,6 +100,8 @@
             name="status" [(ngModel)]="initialStatus" placeholder="Pending" readonly>
           </div>
 
+          <div class="text-danger text-center mb-3" *ngIf="isValid">{{ validationMessage }}</div>
+
           <div class="flex-container">
               <button type="submit" class="btn adminColor">{{editMode ? 'Update Details' : 'Submit Details'}}</button>
               <button type="button" class="btn btn-outline-secondary" (click)="resetForm()"><i class="fa-solid fa-arrows-rotate"></i></button>
