@@ -16,6 +16,7 @@ export class UserDashboardComponent implements OnInit {
   currentId: string;
   initialStatus: string = "Pending";
   searchText: string = '';
+  validationMessage: string = '';
 
   @ViewChild('detailsForm') form: NgForm;
 
@@ -34,12 +35,16 @@ export class UserDashboardComponent implements OnInit {
   }
 
   submitForm(details: any) {
-    if (!this.editMode) {
-      this.dataService.createDetail(details)
+    if(details.itemName !== "" && details.itemDescription !== "" && details.itemPrice !== "" && details.quantity !== ""){
+      if (!this.editMode) {
+        this.dataService.createDetail(details)
+      } else {
+        this.dataService.updateDetail(this.currentId, details)
+      }
+      this.resetForm()
     } else {
-      this.dataService.updateDetail(this.currentId, details)
+      this.validationMessage = "Please complete the form by providing all required details."
     }
-    this.resetForm()
   }
 
   private fetchDetails() {

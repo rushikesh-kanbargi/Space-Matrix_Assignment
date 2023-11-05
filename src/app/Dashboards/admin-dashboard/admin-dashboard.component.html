@@ -1,5 +1,5 @@
 <app-nav-bar [title]="'Admin Dashboard'"></app-nav-bar>
-<div class="main-container" style="margin-top: 100px;">
+<div class="main-container">
   <div class="product-display-area">
     <div class="d-flex justify-content-between align-items-center">
       <button class="btn btn-outline-primary" (click)="onFetchDetails()">&#x21bb;</button>
@@ -100,8 +100,10 @@
             name="status" [(ngModel)]="initialStatus" placeholder="Pending" readonly>
           </div>
 
+          <div class="text-danger text-center mb-3">{{ validationMessage }}</div>
+
           <div class="flex-container">
-              <button type="submit" class="btn adminColor">{{editMode ? 'Update Details' : 'Submit Details'}}</button>
+              <button type="submit" class="btn adminColor" [disabled]="validationMessage">{{editMode ? 'Update Details' : 'Submit Details'}}</button>
               <button type="button" class="btn btn-outline-secondary" (click)="resetForm()"><i class="fa-solid fa-arrows-rotate"></i></button>
           </div>
         </form>

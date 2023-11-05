@@ -11,6 +11,7 @@ export class UserLoginComponent {
   constructor(private router: Router) {}
 
   formData: { username: string, password: string } = { username: '', password: '' };
+  validationMessage: string = '';
 
   login() {
     if (this.formData.username === 'user' && this.formData.password === 'password') {
@@ -19,6 +20,8 @@ export class UserLoginComponent {
         this.router.navigate(['/admin-dashboard']);
     } else if (this.formData.username === 'proccurement' && this.formData.password === 'password') {
       this.router.navigate(['/proccurement-dashboard']);
+    } else {
+      this.validationMessage = 'Invalid username or password. Please try again.';
     }
   }
 }
