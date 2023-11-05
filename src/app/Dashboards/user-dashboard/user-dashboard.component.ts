@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from '../data.service';
-import { Details } from '../modals/details';
+import { DataService } from '../../Services/data.service';
+import { Details } from '../../modals/details';
 import { NgForm } from '@angular/forms';
 import { interval } from 'rxjs';
 
@@ -15,9 +15,7 @@ export class UserDashboardComponent implements OnInit {
   editMode: boolean = false;
   currentId: string;
   initialStatus: string = "Pending";
-
   searchText: string = '';
-
 
   @ViewChild('detailsForm') form: NgForm;
 
@@ -41,7 +39,6 @@ export class UserDashboardComponent implements OnInit {
     } else {
       this.dataService.updateDetail(this.currentId, details)
     }
-
     this.resetForm()
   }
 
@@ -56,39 +53,15 @@ export class UserDashboardComponent implements OnInit {
   edit(id: any) {
     this.editMode = true;
     this.currentId = id;
-    let currentitem = (this.details.find((p => { return p.id == id })));
-    this.form.setValue({
-      itemDescription: currentitem.itemDescription,
-      itemName: currentitem.itemName,
-      itemPrice: currentitem.itemPrice,
-      quantity: currentitem.quantity,
-      status: 'Pending'
-    })
+    this.dataService.editData(this.details, this.currentId, this.form)
   }
 
   resetForm() {
     this.editMode = false;
-    this.form.setValue({
-      itemDescription: '',
-      itemName: '',
-      itemPrice: '',
-      quantity: '',
-      status: 'Pending'
-    })
+    this.dataService.resetData(this.form)
   }
-
 
   filterTableData() {
-    return this.details.filter((detail) => {
-      const search = this.searchText.toLowerCase();
-      return (
-        detail.itemName.toLowerCase().includes(search) ||
-        detail.itemDescription.toLowerCase().includes(search) ||
-        detail.itemPrice.toString().includes(search) ||
-        detail.quantity.toString().includes(search) ||
-        detail.status.toLowerCase().includes(search)
-      );
-    });
+    return this.dataService.filterData(this.details, this.searchText)
   }
-
 }

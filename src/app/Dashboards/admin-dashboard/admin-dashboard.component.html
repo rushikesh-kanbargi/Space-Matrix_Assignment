@@ -1,38 +1,4 @@
-<nav class="navbar navbar-dark bg-dark fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand ml-5" href="#"><h2>User Dashboard</h2></a>
-    <div class="ml-auto">
-      <form class="d-flex mr-4" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-success" type="submit">Search</button>
-      </form>
-    </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">User Dashboard</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <form class="d-flex mt-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-success" type="submit">Search</button>
-        </form>
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/login">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
-
+<app-nav-bar [title]="'Admin Dashboard'"></app-nav-bar>
 <div class="main-container" style="margin-top: 100px;">
   <div class="product-display-area">
     <div class="d-flex justify-content-between align-items-center">
@@ -40,11 +6,12 @@
       <div class="">
         <input type="text" [(ngModel)]="searchText" placeholder="Search" class="form-control form-control-sm mb-0 ml-4">
       </div>
-      <h2 class="text-center mb-0" style="margin-right: 80px;">All Proposals</h2>
-      <button type="button" class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <h2 class="text-center mb-0" style="margin-right: 90px;">All Proposals</h2>
+      <button type="button" class="btn float-right adminColor" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Create New Proposal
       </button>
     </div>
+
     <hr>
     <table id="products" class="styled-table">
       <thead>
@@ -67,7 +34,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let detail of filterTableData(); index as i">
-          <ng-container *ngIf="detail.status === 'Rejected' || detail.status === 'Validate Again' || detail.status === 'Pending'">
+          <ng-container *ngIf="detail.status === 'Approved' || detail.status === 'Closed' ||
+          detail.status === 'Validate Again' || detail.status === 'Pending' || detail.status === 'Rejected'">
           <td>{{i + 1}}</td>
           <td>{{detail.itemName}}</td>
           <td>{{detail.itemDescription}}</td>
@@ -75,8 +43,12 @@
           <td>{{detail.quantity}}</td>
           <td>{{detail.status}}</td>
           <td>
-            <button class="btn btn-danger" (click)="delete(detail.id)"><i class="fa-solid fa-trash"></i></button>
+            <button class="btn btn-success" (click)="approve(detail.id)"><i
+                class="fa-solid fa-circle-check"></i></button>
+            <button class="btn btn-danger1" (click)="reject(detail.id)"><i
+                class="fa-solid fa-rectangle-xmark"></i></button>
             <button class="btn btn-warning" (click)="edit(detail.id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button class="btn btn-danger" (click)="delete(detail.id)"><i class="fa-solid fa-trash"></i></button>
           </td>
           </ng-container>
         </tr>
@@ -84,7 +56,6 @@
     </table>
   </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -130,7 +101,7 @@
           </div>
 
           <div class="flex-container">
-              <button type="submit" class="btn btn-primary">{{editMode ? 'Update Details' : 'Submit Details'}}</button>
+              <button type="submit" class="btn adminColor">{{editMode ? 'Update Details' : 'Submit Details'}}</button>
               <button type="button" class="btn btn-outline-secondary" (click)="resetForm()"><i class="fa-solid fa-arrows-rotate"></i></button>
           </div>
         </form>

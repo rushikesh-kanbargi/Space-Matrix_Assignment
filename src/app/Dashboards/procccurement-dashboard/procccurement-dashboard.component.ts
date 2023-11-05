@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Details } from '../modals/details';
-import { DataService } from '../data.service';
+import { Details } from '../../modals/details';
+import { DataService } from '../../Services/data.service';
 
 @Component({
   selector: 'app-procccurement-dashboard',
@@ -11,7 +11,6 @@ import { DataService } from '../data.service';
 export class ProcccurementDashboardComponent {
 
   details: Details[] = [];
-
   searchText: string = '';
 
   constructor(private dataService: DataService) { }
@@ -44,16 +43,6 @@ export class ProcccurementDashboardComponent {
   }
 
   filterTableData() {
-    return this.details.filter((detail) => {
-      const search = this.searchText.toLowerCase();
-      return (
-        // (detail.status === 'Approved') &&
-        detail.itemName.toLowerCase().includes(search) ||
-        detail.itemDescription.toLowerCase().includes(search) ||
-        detail.itemPrice.toString().includes(search) ||
-        detail.quantity.toString().includes(search) ||
-        detail.status.toLowerCase().includes(search)
-      );
-    });
+    return this.dataService.filterData(this.details, this.searchText)
   }
 }

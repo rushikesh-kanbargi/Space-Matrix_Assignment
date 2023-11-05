@@ -4,11 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { UserDashboardComponent } from './Dashboards/user-dashboard/user-dashboard.component';
+import { AdminDashboardComponent } from './Dashboards/admin-dashboard/admin-dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ProcccurementDashboardComponent } from './procccurement-dashboard/procccurement-dashboard.component';
+import { ProcccurementDashboardComponent } from './Dashboards/procccurement-dashboard/procccurement-dashboard.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProcccurementDashboardComponent } from './procccurement-dashboard/procc
     UserLoginComponent,
     UserDashboardComponent,
     AdminDashboardComponent,
-    ProcccurementDashboardComponent
+    ProcccurementDashboardComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

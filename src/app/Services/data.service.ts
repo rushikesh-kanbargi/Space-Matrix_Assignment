@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Details } from './modals/details';
+import { Details } from '../modals/details';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -38,5 +38,39 @@ export class DataService {
 
   approve(id: string, value: any) {
     this.http.put(`https://spacematrix-b7a0f-default-rtdb.firebaseio.com/details/${id}.json`, value). subscribe();
+  }
+
+  resetData(form: any) {
+    return form.setValue({
+      itemDescription: '',
+      itemName: '',
+      itemPrice: '',
+      quantity: '',
+      status: 'Pending'
+    })
+  }
+
+  filterData(details: any, searchText: string) {
+    return details.filter((detail) => {
+      const search = searchText.toLowerCase();
+      return (
+        detail.itemName.toLowerCase().includes(search) ||
+        detail.itemDescription.toLowerCase().includes(search) ||
+        detail.itemPrice.toString().includes(search) ||
+        detail.quantity.toString().includes(search) ||
+        detail.status.toLowerCase().includes(search)
+      );
+    });
+  }
+
+  editData(details: any, id: any, form: any) {
+    let currentitem = (details.find((p => { return p.id == id })));
+    form.setValue({
+      itemDescription: currentitem.itemDescription,
+      itemName: currentitem.itemName,
+      itemPrice: currentitem.itemPrice,
+      quantity: currentitem.quantity,
+      status: 'Pending'
+    })
   }
 }

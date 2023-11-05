@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from '../data.service';
+import { DataService } from '../../Services/data.service';
 import { NgForm } from '@angular/forms';
-import { Details } from '../modals/details';
+import { Details } from '../../modals/details';
 import { interval } from 'rxjs';
 
 @Component({
@@ -15,9 +15,7 @@ export class AdminDashboardComponent implements OnInit {
   editMode: boolean = false;
   currentId: string;
   initialStatus: string = "Pending";
-
   searchText: string = '';
-
   @ViewChild('detailsForm') form: NgForm;
 
   constructor(private dataService: DataService) { }
@@ -54,25 +52,16 @@ export class AdminDashboardComponent implements OnInit {
   edit(id: any) {
     this.editMode = true;
     this.currentId = id;
-    let currentitem = (this.details.find((p => { return p.id == id })));
-    this.form.setValue({
-      itemDescription: currentitem.itemDescription,
-      itemName: currentitem.itemName,
-      itemPrice: currentitem.itemPrice,
-      quantity: currentitem.quantity,
-      status: 'Pending'
-    })
+    this.dataService.editData(this.details, this.currentId, this.form)
   }
 
   resetForm() {
     this.editMode = false;
-    this.form.setValue({
-      itemDescription: '',
-      itemName: '',
-      itemPrice: '',
-      quantity: '',
-      status: 'Pending'
-    })
+    this.dataService.resetData(this.form)
+  }
+
+  filterTableData() {
+    return this.dataService.filterData(this.details, this.searchText)
   }
 
   approve(id: any) {
@@ -87,18 +76,5 @@ export class AdminDashboardComponent implements OnInit {
     let currentitem = (this.details.find((p => { return p.id == id })));
     currentitem.status = 'Rejected';
     this.dataService.approve(id, currentitem);
-  }
-
-  filterTableData() {
-    return this.details.filter((detail) => {
-      const search = this.searchText.toLowerCase();
-      return (
-        detail.itemName.toLowerCase().includes(search) ||
-        detail.itemDescription.toLowerCase().includes(search) ||
-        detail.itemPrice.toString().includes(search) ||
-        detail.quantity.toString().includes(search) ||
-        detail.status.toLowerCase().includes(search)
-      );
-    });
   }
 }
