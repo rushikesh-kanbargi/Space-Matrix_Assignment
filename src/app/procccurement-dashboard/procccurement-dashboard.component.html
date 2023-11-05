@@ -1,0 +1,100 @@
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand ml-5" href="#"><h2>Proccurement Dashboard</h2></a>
+    <div class="ml-auto">
+      <form class="d-flex mr-4" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success" type="submit">Search</button>
+      </form>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Proccurement Dashboard</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/login">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+<!-- <div class="header">
+  <h2>Proccurement Dashboard</h2>
+</div> -->
+<div class="main-container" style="margin-top: 100px;">
+  <div class="product-display-area">
+    <div class="d-flex justify-content-between align-items-center">
+      <button class="btn btn-outline-primary" (click)="onFetchDetails()">&#x21bb;</button>
+      <div class="">
+        <input type="text" [(ngModel)]="searchText" placeholder="Search" class="form-control form-control-sm mb-0 ml-4">
+      </div>
+      <h2 class="text-center mb-0" style="margin-right: 255px;">All Proposals</h2>
+    </div>
+    <!-- <div class="flex-container">
+      <h2 class="text-center">All Proposals</h2>
+      <button class="btn btn-outline-primary" (click)="onFetchDetails()">&#x21bb;</button>
+    </div> -->
+    <hr>
+    <table id="products" class="styled-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Status
+            <a href="#" style="color: white;" data-mdb-toggle="tooltip"
+              title="● Initially in 'Pending' state, when new porposal is created.
+● If Admin accepts goes to 'Approved' state else 'Rejected'.
+● If Proccurement accepts 'Closed' else 'Validate Again'.">
+              <i class="fa-solid fa-circle-info"></i>
+            </a>
+          </th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of filterTableData(); index as i">
+          <ng-container *ngIf="detail.status === 'Approved' || detail.status === 'Closed' || detail.status === 'Validate Again'">
+          <td>{{i + 1}}</td>
+          <td>{{detail.itemName}}</td>
+          <td>{{detail.itemDescription}}</td>
+          <td>{{detail.itemPrice}}</td>
+          <td>{{detail.quantity}}</td>
+          <td>{{detail.status}}</td>
+          <td>
+            <button class="btn btn-success" (click)="approve(detail.id)"><i
+                class="fa-solid fa-circle-check"></i></button>&nbsp;
+            <button class="btn btn-danger" (click)="reject(detail.id)"><i
+                class="fa-solid fa-rectangle-xmark"></i></button>
+          </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<button class="btn btn-logout" routerLink="/login">Logout</button>

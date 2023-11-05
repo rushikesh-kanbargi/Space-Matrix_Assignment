@@ -1,1 +1,136 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+label, td {font-weight:bold}
+
+hr {
+  border-color: #1ABC9C; /* Match the border color to the bottom border */
+  margin: 12px 0;
+  height: 3px;
+  background-color: #1ABC9C;
+}
+
+.container{
+  display: flex;
+}
+
+.form-area, .product-display-area {
+  width: 48%;
+  background-color: #dee2e6;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-area label, .product-display-area label {
+  display: block;
+  margin-bottom: 6px;
+  margin-left: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px; /* Adjust this margin as needed to control vertical spacing */
+}
+
+.submit-button {
+  flex: 1;
+  text-align: center;
+}
+
+.reset-button {
+  flex: 0;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  box-sizing: border-box;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.styled-table th, .styled-table td {
+  padding: 10px;
+  text-align: center;
+}
+
+.styled-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.styled-table tr:hover {
+  background-color: white;
+}
+
+/* Style the action buttons within the table */
+.styled-table .btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.styled-table .btn-danger1 {
+  background-color: #FF5733;
+  color: white;
+}
+
+.styled-table .btn-warning {
+  background-color: #FFC300;
+  color: #8E5D32;
+}
+
+.btn.btn-logout {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.btn.btn-logout:hover {
+  background-color: #1ABC9C;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h2.text-center {
+  margin: 0; /* Remove any default margins */
+  text-align: center;
+  flex-grow: 1; /* Allow the title to take available space */
+}

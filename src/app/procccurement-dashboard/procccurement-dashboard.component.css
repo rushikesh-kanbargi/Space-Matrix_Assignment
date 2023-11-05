@@ -1,0 +1,27 @@
+.header {
+  text-align: center;
+  background-color: #EFC050;
+  padding: 16px 0;
+  border-bottom: 2px solid #1ABC9C;
+  margin-bottom: 20px; /* Add margin to separate it from the content below */
+  color: white;
+}
+
+.form-area, .product-display-area {
+  width: 100%;
+  background-color: #dee2e6;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.main-container {
+  display: 100%;
+  justify-content: space-between;
+  margin: 20px 50px;
+}
+
+.styled-table th {
+  background-color: #EFC050;
+  color: white;
+}
